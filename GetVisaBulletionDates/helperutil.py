@@ -23,30 +23,18 @@ def format_date(date):
     month = date[2:5]
     year = date[5:]
 
-    if month == "JAN":
-        month = "January"
-    elif month == "FEB":
-        month = "February"
-    elif month == "MAR":
-        month = "March"
-    elif month == "APR":
-        month = "April"
-    elif month == "MAY":
-        month = "May"
-    elif month == "JUN":
-        month = "June"
-    elif month == "JUL":
-        month = "July"
-    elif month == "AUG":
-        month = "August"
-    elif month == "SEP":
-        month = "September"
-    elif month == "OCT":
-        month = "October"
-    elif month == "NOV":
-        month = "November"
-    elif month == "DEC":
-        month = "December"
+    if month == "JAN": month = "January"
+    elif month == "FEB":  month = "February"
+    elif month == "MAR": month = "March"
+    elif month == "APR": month = "April"
+    elif month == "MAY": month = "May"
+    elif month == "JUN": month = "June"
+    elif month == "JUL": month = "July"
+    elif month == "AUG": month = "August"
+    elif month == "SEP": month = "September"
+    elif month == "OCT": month = "October"
+    elif month == "NOV": month = "November"
+    elif month == "DEC": month = "December"
 
     # Add the ordinal suffix to the day
     if day[-1] == '1':

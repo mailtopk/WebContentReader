@@ -2,7 +2,7 @@
 import get_visa_dates as gvd
 import helperutil as hutil
 
-print('******** Bot Started *********************')
+hutil.print_boarder_line_with_center('Start ')
 
 try :
 
@@ -25,32 +25,42 @@ try :
             emp_visa_bulletion_info.append(trimmed_dataframe)
 
         # Compare 
-        if (emp_visa_bulletion_info[0].eq(emp_visa_bulletion_info[1])).all().all():
-            print('\nNo change in dates for India and China')
+        #if (emp_visa_bulletion_info[0].eq(emp_visa_bulletion_info[1])).all().all():
+        #    print('\nNo change in dates for India and China')
        
         hutil.print_pretty_title('India Employment Dates')
 
          # India Eb1
         print('\nIndia EB 1')
-        eb1_india_value_current_month = hutil.format_date(emp_visa_bulletion_info[0].at[1, 'INDIA'])
-        eb1_india_value_next_month =  hutil.format_date(emp_visa_bulletion_info[1].at[1, 'INDIA'])
-        print("Current Month :" + eb1_india_value_current_month + "\n" + "Next Month :" + eb1_india_value_next_month)
+        hutil.compare_and_print_india_eb1_details(emp_visa_bulletion_info)
         
+        # India Eb2
         print('\nIndia EB 2')
-        eb2_india_value_current_month = hutil.format_date(emp_visa_bulletion_info[0].at[2, 'INDIA'])
-        eb2_india_value_next_month = hutil.format_date(emp_visa_bulletion_info[1].at[2, 'INDIA'])
-        print("Current Month :" + eb2_india_value_current_month + "\n" + "Next Month :" + eb2_india_value_next_month)
+        hutil.compare_and_print_india_eb2_details(emp_visa_bulletion_info)
 
+        # India EB3
         print('\nIndia EB 3')
-        eb3_india_value_current_month = hutil.format_date(emp_visa_bulletion_info[0].at[3, 'INDIA'])
-        eb23_india_value_current_month = hutil.format_date(emp_visa_bulletion_info[1].at[3, 'INDIA'])
-        print("Current Month :" + eb3_india_value_current_month + "\n" + "Next Month :" + eb23_india_value_current_month)
+        hutil.compare_and_print_india_eb3_details(emp_visa_bulletion_info)
+
+        hutil.print_pretty_title('China Employment Dates')
+        
+        #China Eb1
+        print('\nChina EB 1')
+        hutil.compare_and_print_china_eb1_details(emp_visa_bulletion_info)
+
+        #China Eb2
+        print('\nChina EB 2')
+        hutil.compare_and_print_china_eb2_details(emp_visa_bulletion_info)
+
+        #China Eb3
+        print('\nChina EB 3')
+        hutil.compare_and_print_china_eb3_details(emp_visa_bulletion_info)
 
 
         hutil.print_boarder_line()
 
         for i in range(0, len(emp_visa_bulletion_info)):
-            print(emp_visa_bulletion_info[i])
+            print(f"\n{emp_visa_bulletion_info[i]}")
             #print(emp_visa_bulletion_info[i].query("Employment_based in ['1st','2nd', '3rd']")[['Employment_based', 'INDIA', 'CHINA_mainland born']])
 
 finally:
@@ -58,4 +68,4 @@ finally:
 
 
 
-print('******** End of bot *********************')
+hutil.print_boarder_line_with_center ('End of bot ')

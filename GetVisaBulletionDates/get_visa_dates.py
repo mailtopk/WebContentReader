@@ -42,7 +42,7 @@ class CheckVisaBulletion :
         strip_current_month = datetime.strptime(current_month_num, "%m")
         current_month = 'visa-bulletin-for-' + strip_current_month.strftime("%B") + '-' + str(datetime.now().year) + '.html'
 
-        next_month_num = str(datetime.now().month -1)
+        next_month_num = str(datetime.now().month +1)
         strip_next_month_num =  datetime.strptime(next_month_num, "%m")
         next_month = 'visa-bulletin-for-' + strip_next_month_num.strftime("%B") + '-' + str(datetime.now().year) + '.html'
 

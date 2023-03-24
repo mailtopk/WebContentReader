@@ -49,6 +49,19 @@ def format_date(date):
     # Return the formatted date
     return f'{month} {day}, {year}'
 
+def printShortDescription(shortStatment, currentDates, newDates):
+    dateDiffInDays = compare_dates(currentDates, newDates)
+    if dateDiffInDays < 0:
+        print(f"{shortStatment} DATE's RETROGRESSED")
+        print(f"Dates are retrogressed by {dateDiffInDays} days, Current Date : {currentDates}. New Date : {newDates} ")
+        return
+    elif dateDiffInDays == 0 :
+        print(f"{shortStatment} NO MOMENT")
+        print(f"There is no change/movements in dates. Current : {currentDates}. New Date {newDates}")
+        return
+    print(f"{shortStatment} FORWARD MOVEMENT")
+    print(f"Good news, dates are advansed by {dateDiffInDays} days. Current : {currentDates}. New Date {newDates}")
+
 
 # Read config file
 def get_config():
@@ -70,68 +83,33 @@ def get_config():
 def compare_dates(date1, date2):
     date1 = datetime.datetime.strptime(date1, '%d%b%y') # expected formate is 01FEB22
     date2 = datetime.datetime.strptime(date2, '%d%b%y')
-    delta = date1 - date2
+    delta = date2 - date1
     return delta.days
 
 def compare_and_print_india_eb1_details(emp_visa_bulletion_info):
     country = 'INDIA'
     eb1_date1 = emp_visa_bulletion_info[0].at[1, country] #1st row 2nd column 
     eb1_date2 = emp_visa_bulletion_info[1].at[1, country]
-
-    delta = compare_dates(eb1_date1, eb1_date2)
-
-    priority_date = f"Current month priority date is: {format_date(eb1_date1)} Next month priority date is: {format_date(eb1_date2)}"
+    
     short_statement = "\nIndia EB 1 - "
-    if delta < 0 :
-        print(f"{short_statement} BACKWARD MOMENT")
-        print(f"There is a BACKWARD MOMENT for Eb1 {country} by {delta}. {priority_date}")
-    elif delta == 0 :
-        print(f"{short_statement} NO MOMENT")
-        print(f"There is NO MOMENT for Eb1 {country}. {priority_date} ")
-    else :
-        print(f"{short_statement} FORWARD MOMENT")
-        print(f"Good News!! There is FORWARD MOMENT for Eb1 by {delta} days. {priority_date}")
+    printShortDescription(short_statement, eb1_date1, eb1_date2)
 
 
 def compare_and_print_india_eb2_details(emp_visa_bulletion_info):
     country = 'INDIA'
-
     eb2_date1 = emp_visa_bulletion_info[0].at[2, country] #2rd row 2nd column 
     eb2_date2 = emp_visa_bulletion_info[1].at[2, country]
 
-    delta = compare_dates(eb2_date1, eb2_date2)
-    priority_dates = f"Current month priority date is: {format_date(eb2_date1)} Next month priority date is {format_date(eb2_date2)}"
     short_statement = "\nIndia EB 2 - "
-
-    if delta < 0 :
-        print(f"{short_statement} BACKWORD MOMENT")
-        print(f"There is a BACKWARD MOMENT for Eb2 {country} by {delta} . {priority_dates}")
-    elif delta == 0 :
-        print(f"{short_statement} NO MOMENT" )
-        print(f"There is NO MOMENT for Eb2 {country}. {priority_dates}")
-    else :
-        print(f"{short_statement} FORWARD MOMENT")
-        print(f"Good News!! There is FORWARD MOMENT for Eb2 by {delta} days. {priority_dates}")
-
+    printShortDescription(short_statement, eb2_date1, eb2_date2)
 
 def compare_and_print_india_eb3_details(emp_visa_bulletion_info):
     country = 'INDIA'
     eb3_date1 = emp_visa_bulletion_info[0].at[3, country] #3rd row 2nd column 
     eb3_date2 = emp_visa_bulletion_info[1].at[3, country]
 
-    delta = compare_dates(eb3_date1, eb3_date2)
     short_statement = "\nIndia EB 3 - "
-    priority_dates = f"Current month priority date is: {format_date(eb3_date1)} Next month priority date is: {format_date(eb3_date2)}"  
-    if delta < 0 :
-        print(f"{short_statement} BACKWORD MOMENT")
-        print(f"There is a BACKWARD MOMENT for Eb3 {country} by {delta}. {priority_dates}")
-    elif delta == 0 :
-        print(f"{short_statement} NO MOMENT")
-        print(f"There is NO MOMENT for Eb3 {country}. {priority_dates} ")
-    else :
-        print(f"{short_statement} FORWARD MOMENT")
-        print(f"Good News!! There is FORWARD MOMENT for Eb3 by {delta} days. {priority_dates}")
-
+    printShortDescription(short_statement, eb3_date1, eb3_date2)
 
 #China Eb1
 def compare_and_print_china_eb1_details(emp_visa_bulletion_info):
@@ -139,18 +117,8 @@ def compare_and_print_china_eb1_details(emp_visa_bulletion_info):
     eb1_date1 = emp_visa_bulletion_info[0].at[1, country] #1st row 3nd column 
     eb1_date2 = emp_visa_bulletion_info[1].at[1, country]
 
-    delta = compare_dates(eb1_date1, eb1_date2)
     short_statement = "\nChina EB 1 - "
-    priority_dates = f"Current month priority date is: {format_date(eb1_date1)} Next month priority date is: {format_date(eb1_date2)}"
-    if delta < 0 :
-        print(f"{short_statement} BACKWORD MOMENT")
-        print(f"There is a BACWORD MOMENT for Eb1 CHINA by {delta}. {priority_dates}")
-    elif delta == 0 :
-        print(f"{short_statement} NO MOMENT")
-        print(f"There is NO MOMENT for Eb3 CHINA. {priority_dates} ")
-    else :
-        print(f"{short_statement} FORWARD MOMENT")
-        print(f"Good News!! There is FORWARD MOMENT for Eb3 by CHINA days. {priority_dates} ")
+    printShortDescription(short_statement, eb1_date1, eb1_date2)
 
  #China Eb2
 def compare_and_print_china_eb2_details(emp_visa_bulletion_info):
@@ -158,34 +126,14 @@ def compare_and_print_china_eb2_details(emp_visa_bulletion_info):
     eb2_date1 = emp_visa_bulletion_info[0].at[2, country] #1st row 3nd column 
     eb2_date2 = emp_visa_bulletion_info[1].at[2, country]
 
-    delta = compare_dates(eb2_date1, eb2_date2)
-    priority_dates =  f"Current month priority date is: {format_date(eb2_date1)} Next month priority is: {format_date(eb2_date2)}"
     short_statement = "\nChina EB 2 - "
-    if delta < 0 :
-        print(f"{short_statement} BACKWARD MOMENT")
-        print(f"There is a BACKWARD MOMENT for Eb2 CHINA by {delta}. {priority_dates}")
-    elif delta == 0 :
-        print(f"{short_statement} No MOMENT")
-        print(f"There is NO MOMENT for Eb2 CHINA. {priority_dates}. {priority_dates} ")
-    else :
-        print(f"{short_statement} FORWARD MOMENT")
-        print(f"Good News!!. There is a FORWARD MOMENT for Eb2 by CHINA days. {priority_dates}")
+    printShortDescription(short_statement, eb2_date1, eb2_date2)
         
         #China Eb3
 def compare_and_print_china_eb3_details(emp_visa_bulletion_info):
     country = 'CHINA_mainland born'
-    eb3_date1 = emp_visa_bulletion_info[0].at[1, country] #1st row 3nd column 
-    eb3_date2 = emp_visa_bulletion_info[1].at[1, country]
+    eb3_date1 = emp_visa_bulletion_info[0].at[3, country] #1st row 3nd column 
+    eb3_date2 = emp_visa_bulletion_info[1].at[3, country]
 
-    delta = compare_dates(eb3_date1, eb3_date2)
-    priority_dates = f"Current month priority date is: {format_date(eb3_date1)}. Next month priorityis:  {format_date(eb3_date2)}"
     short_statement = "\nChina EB 3 - "
-    if delta < 0 :
-        print(f"{short_statement} BACKWARD MOMENT")
-        print(f"There is a BACKWARD MOMENT for Eb3 CHINA by {delta}. {priority_dates}")
-    elif delta == 0 :
-        print(f"{short_statement} NO MOMENT")
-        print(f"There is NO MOMENT for Eb3 CHINA. {priority_dates} ")
-    else :
-        print(f"{short_statement} FORWARD MOMENT")
-        print(f"Good News!! There is a FORWARD MOMENT for Eb3 by CHINA days. {priority_dates}")
+    printShortDescription(short_statement, eb3_date1, eb3_date2)

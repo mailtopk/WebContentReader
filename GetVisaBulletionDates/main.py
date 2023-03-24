@@ -1,18 +1,20 @@
 
 import get_visa_dates as gvd
 import helperutil as hutil
+#import datalyer as dl
 
 def main():
     try :
 
+        # Check to see if 
         # Create class instance
         visa_bulletion = gvd.CheckVisaBulletion()
         visa_bulletion.init_webdriver()
 
-        comparing_months_url = visa_bulletion.get_current_and_next_month_links()
+        (comparing_months_url, month) = visa_bulletion.get_current_and_next_month_links()
 
         if len(comparing_months_url) == 1:
-            hutil.print_pretty_title('Visa bulletion yet to release.')
+            hutil.print_pretty_title(f'Visa bulletion yet to release for {month}')
         else: 
             # Array of data frames
             emp_visa_bulletion_info = []

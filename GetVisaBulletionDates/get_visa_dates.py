@@ -15,13 +15,12 @@ class CheckVisaBulletion :
     page_source = ''
     __url = ''
     customOptions = Options()
-    customOptions.add_argument('--headless')
-    customOptions.add_argument('-disable-gpu')
     config = util.get_config()
     
 
     def __init__(self) :
         self.customOptions.add_argument('--headless')
+        self.customOptions.add_argument('-disable-gpu')
         self.__url = self.config['visabulletin']['mainpage'] 
         
 
@@ -32,6 +31,9 @@ class CheckVisaBulletion :
         if cls.driver != None and cls.driver.service.process :
             cls.driver.quit()
             cls.driver = None
+
+    #def is_visa_release_date_within_window():
+
 
     # build the dates string
     def get_current_and_next_month_links(cls):
@@ -46,7 +48,7 @@ class CheckVisaBulletion :
         strip_next_month_num =  datetime.strptime(next_month_num, "%m")
         next_month = 'visa-bulletin-for-' + strip_next_month_num.strftime("%B") + '-' + str(datetime.now().year) + '.html'
 
-        return cls.__get_visa_date_href_of_month([current_month, next_month])
+        return (cls.__get_visa_date_href_of_month([current_month, next_month]), strip_next_month_num.strftime("%B") + '-' + str(datetime.now().year))
     
     
     def __get_visa_date_href_of_month(self, months):
